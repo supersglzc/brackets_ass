@@ -19,33 +19,45 @@ int main() {
 
         if (next == '(' || next == '[' || next == '{') {
             // Process opening bracket, write your code here
-            	Bracket bracket;
-		if(next == '(')
-			bracket = {ROUND, position};
-		else if(next == '[')
-			bracket = {SQUARE, position};
-		else	
-			bracket = {CURLY, position};
-		push(opening_brackets_stack, bracket);
-        }
-        if (next == ')' || next == ']' || next == '}') {
-        	Bracket bracket2 = pop(opening_brackets_stack);
-		BracketType type;
-		if(next == '(')
+            	enum BracketType type;
+                if(next == '(')
                         type = ROUND;
                 else if(next == '[')
                         type = SQUARE;
                 else
                         type = CURLY;
-		if(bracket2.type != type){
+		//printf("%d\n", type);
+		Bracket bracket = {type, position};
+		push(opening_brackets_stack, bracket);
+        }
+        if (next == ')' || next == ']' || next == '}') {
+        	Bracket bracket2 = pop(opening_brackets_stack);
+		enum BracketType type2;
+		if(next == ')')
+                        type2 = ROUND;
+                else if(next == ']')
+                        type2 = SQUARE;
+                else
+                        type2 = CURLY;
+		//printf("here\n");
+		//printf("%d\n", bracket2.type);
+		//printf("%d\n", type2);
+		if(bracket2.type != type2){
 			printf("%d\n", position + 1);
 			return 0;
-		}
-		
+		}	
         }
     }
-
+	Bracket head;
+	if(!isEmpty(opening_brackets_stack)){
+		while(!isEmpty(opening_brackets_stack)){
+			head = pop(opening_brackets_stack);
+		}
+		printf("%d\n", head.position + 1);
+		return 0;
+	}
+	
     // Printing answer, write your code here
-	printf("My result is:\n");
+	printf("My result is: Success\n");
     return 0;
 }

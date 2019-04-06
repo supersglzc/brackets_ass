@@ -27,6 +27,7 @@ void push(Stack* stack, Bracket item){
 	if (isFull(stack)) 
         	return; 
 	(stack->array)[stack->top + 1] = item;
+	stack->top ++;
 }
 
 // Function to remove an item from stack and return it. 
