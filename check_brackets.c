@@ -19,10 +19,29 @@ int main() {
 
         if (next == '(' || next == '[' || next == '{') {
             // Process opening bracket, write your code here
+            	Bracket bracket;
+		if(next == '(')
+			bracket = {ROUND, position};
+		else if(next == '[')
+			bracket = {SQUARE, position};
+		else	
+			bracket = {CURLY, position};
+		push(opening_brackets_stack, bracket);
         }
-
         if (next == ')' || next == ']' || next == '}') {
-            // Process closing bracket, write your code here
+        	Bracket bracket2 = pop(opening_brackets_stack);
+		BracketType type;
+		if(next == '(')
+                        type = ROUND;
+                else if(next == '[')
+                        type = SQUARE;
+                else
+                        type = CURLY;
+		if(bracket2.type != type){
+			printf("%d\n", position + 1);
+			return 0;
+		}
+		
         }
     }
 
